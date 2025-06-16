@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>mogitate</title>
-    <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/detail/css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('css/sanitize.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/detail/css')); ?>">
 </head>
 <body>
     <header>
@@ -19,15 +19,15 @@
 
     <main>
         <form action="/products/{productId}/update" method="post">
-        @csrf
+        <?php echo csrf_field(); ?>
             <div>
                 <div>
-                    <p><a href="/products">商品一覧</a>/ {{$product->name}}</p>
+                    <p><a href="/products">商品一覧</a>/ <?php echo e($product->name); ?></p>
                 </div>
                 <div>
                     <div>
                         <form action="">
-                            <img src="{{ asset($product->image) }}" alt="">
+                            <img src="<?php echo e(asset($product->image)); ?>" alt="">
                             <input type="file">
                         </form>
                     </div>
@@ -36,13 +36,13 @@
                     <div>
                         <form action="">
                             <p>商品名</p>
-                            <input type="text" name="name" value="{{ $product->name }}">
+                            <input type="text" name="name" value="<?php echo e($product->name); ?>">
                         </form>
                     </div>
                     <div>
                         <form action="">
                             <p>値段</p>
-                            <input type="text" name="price" value="{{ $product->price }}">
+                            <input type="text" name="price" value="<?php echo e($product->price); ?>">
                         </form>
                     </div>
                     <div>
@@ -54,7 +54,7 @@
                     <div>
                         <form action="">
                             <p>商品説明</p>
-                            <textarea name="description" id="" cols="30" rows="10" >{{ $product->description }}</textarea>
+                            <textarea name="description" id="" cols="30" rows="10" ><?php echo e($product->description); ?></textarea>
                         </form>
                     </div>
                     <div>
@@ -74,3 +74,4 @@
 
     </main>
 </body>
+<?php /**PATH /var/www/resources/views/detail.blade.php ENDPATH**/ ?>

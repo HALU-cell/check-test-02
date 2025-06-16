@@ -10,4 +10,11 @@ class Product extends Model
     use HasFactory;
 
     protected $fillable = ['name', 'price', 'image', 'description'];
+
+    public function scopeKeywordSearch($query, $keyword)
+    {
+        if (!empty($keyword)) {
+            $query->where('name', 'like', '%' . $keyword . '%');
+        }
+    }
 }

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>mogitate</title>
-    <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
+    <link rel="stylesheet" href="<?php echo e(asset('css/sanitize.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/index.css')); ?>">
 </head>
 <body>
     <header class="header">
@@ -27,9 +27,9 @@
             </div>
             <div class="product">
                 <form class="product__search" action="/products/search" method="get">
-                @csrf
+                <?php echo csrf_field(); ?>
                     <div class="product__search-form">
-                        <input type="text" name="keyword" value="{{ old('keyword') }}" placeholder="商品名で検索">
+                        <input type="text" name="keyword" value="<?php echo e(old('keyword')); ?>" placeholder="商品名で検索">
                     </div>
                     <div class="product__search-button">
                         <button type="submit">検索</button>
@@ -48,21 +48,23 @@
                 </form>
                 <div class="product__content">
                     <div class="product__list">
-                    @foreach ($products as $product)
-                        <a class="product__block" href="/products/{{ $product->id }}">
-                            <img class="product__block--img" src="{{ asset($product->image) }}" alt="">
+                    <?php $__currentLoopData = $products; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <a class="product__block" href="/products/<?php echo e($product->id); ?>">
+                            <img class="product__block--img" src="<?php echo e(asset($product->image)); ?>" alt="">
                             <div class="product__block--item">
-                                <p>{{ $product->name }}</p>
-                                <p>{{ $product->price }}</p>
+                                <p><?php echo e($product->name); ?></p>
+                                <p><?php echo e($product->price); ?></p>
                             </div>
                         </a>
-                    @endforeach
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
                 </div>
             </div>
-            {{ $products->links() }}
+            <?php echo e($products->links()); ?>
+
         </div>
     </main>
 
 </body>
 </html>
+<?php /**PATH /var/www/resources/views/index.blade.php ENDPATH**/ ?>
